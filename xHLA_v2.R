@@ -1,5 +1,12 @@
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("IRanges")
+
 library(jsonlite)
 library(lpSolve)
+library(IRanges)
+
 
 message("checking installation of reference file")
 if(!file.exists("chr6/chr6.fa.pac")){system("bwa index -a bwtsw chr6/chr6.fa")}

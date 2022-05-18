@@ -45,8 +45,8 @@ my %suf;
 my %type;
 my %gene;
 my %is_gene;
-open(IN, "$root/data/hla.tsv") or die $!;
-print STDERR "got  $root/data/hla.tsv\n";
+open(IN, "./data/hla.tsv") or die $!;
+print STDERR "got  ./data/hla.tsv\n";
 while(<IN>)
 {
 	chomp;
@@ -64,12 +64,14 @@ while(<IN>)
 print STDERR "\tfound ", scalar(keys %tseq), " HLA exons\n";
 
 print STDERR "processing FASTQ file\n";
-open(IN, "diamond blastx -t . --index-mode 1  --min-score 10 --top 20 -c 1 -d $root/data/hla -q $fastq_file -f tab --quiet -o /dev/stdout |") or die $!;
+open(IN, "diamond blastx -t . --min-score 10 --top 20 -c 1 -d data/hla -q hla-010302B_S301/010302B_S301.fq.gz -f tab  -o /dev/stdout | ") or die $!;
+          
 my %mLEN;
 my %mlen;
 my %match;
 my %matched;
 my %nonspec;
+
 while(<IN>)
 {
 	my ($qu, $target, $identity, $len, $mis, $gap, $qs, $qe, $ts, $te, $e, $score) = split(/\t/, $_);
@@ -78,9 +80,11 @@ while(<IN>)
 	my $qtag = "$qu==".abs($qs - $qe);
 	my $len = $te - $ts + 1;
 	my $g = $is_gene{$target};
-#	if($len > $mlen{$g}->{$q})
+#	if($len > $mlen{$g} -> {$q});
+#	if($len < $mLEN{$qu}){print "fail"};
 	if($len >= $mLEN{$qu})
 	{
+#	print "got one";
 		$mLEN{$qu} = $len;
 		$mlen{$g}->{$q} = $len;
 		$match{$g}->{$q} = [$target, $qs, $qe, $ts, $te, $len];
@@ -93,7 +97,10 @@ print STDERR "\t", scalar(keys %nonspec), " reads matched to HLA types not in th
 
 my %dna;
 my %dna_name;
-open(IN, "$root/data/hla.fna") or die $!;
+
+print STDERR "reading hla.fna\n";
+
+open(IN, "./data/hla.fna") or die $!;
 while(<IN>)
 {
 	my @a = split(/\t/, $_);
@@ -110,6 +117,7 @@ my %done;
 my %done2;
 my %save;
 my %save2;
+
 for my $g(keys %match)
 {
 	for my $q(keys %{$match{$g}})
