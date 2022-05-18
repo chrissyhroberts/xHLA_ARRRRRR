@@ -45,11 +45,15 @@ i.e. in R
 >install.packages("lpSolve")  
 >install.packages("data.table")  
 >install.packages("parallel")  
->install.packages("IRanges")  
+
+>if (!require("BiocManager", quietly = TRUE))  
+>install.packages("BiocManager")  
+>BiocManager::install("IRanges")  
   
 IMPORTANT - The reference fasta file needs to be in place if you want this to work. 
 
-Download a fasta reference file for chromosome 6 or the MHC region. You could use this one http://hgdownload.cse.ucsc.edu/goldenPath/hg38/chromosomes/chr6.fa.gz
+Download a fasta reference file for chromosome 6 or the MHC region. You could use this one http://hgdownload.cse.ucsc.edu/goldenPath/hg38/chromosomes/
+The file `chr6.fa.gz` is the one to use.
 
 Put the fasta file in the chr6/ folder
 
