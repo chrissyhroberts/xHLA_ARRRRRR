@@ -64,7 +64,7 @@ while(<IN>)
 print STDERR "\tfound ", scalar(keys %tseq), " HLA exons\n";
 
 print STDERR "processing FASTQ file\n";
-open(IN, "diamond blastx -t . --min-score 10 --top 20 -c 1 -d data/hla -q hla-010302B_S301/010302B_S301.fq.gz -f tab  -o /dev/stdout | ") or die $!;
+open(IN, "diamond blastx -t . --min-score 10 --top 20 -c 1 -d data/hla -q $fastq_file -f tab  -o /dev/stdout | ") or die $!;
           
 my %mLEN;
 my %mlen;

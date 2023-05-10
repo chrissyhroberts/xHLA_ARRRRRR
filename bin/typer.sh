@@ -32,29 +32,35 @@ TEMP=temp-$RANDOM-$RANDOM-$RANDOM
 
 echo "Extracting reads from S3"
 samtools view -u $S3 chr6:29886751-33090696 | samtools view -L $BIN/../data/hla.bed - > ${TEMP}.sam
+
 $BIN/preprocess.pl ${TEMP}.sam | gzip > $OUT/$ID.fq.gz
+
 rm ${TEMP}.sam
+
 echo "Aligning reads to IMGT database"
+
 if [ "$FULL" = true ]; then
     $BIN/align.pl $OUT/${ID}.fq.gz $OUT/${ID}.tsv full
-else
-    $BIN/align.pl $OUT/${ID}.fq.gz $OUT/${ID}.tsv
+
+else    $BIN/align.pl $OUT/${ID}.fq.gz $OUT/${ID}.tsv
 fi
 
 echo "Typing"
 $BIN/typing.r $OUT/${ID}.tsv $OUT/${ID}.hla
 
 echo "Reporting"
-$BIN/report.py -in $OUT/${ID}.hla -out $OUT/${ID}.json -subject $ID -sample $ID
+echo "$BIN/report.py -in $OUT/${ID}.hla -out $OUT/${ID}.json -subject $ID -sample $ID"
+python3 $BIN/report.py -in $OUT/${ID}.hla -out $OUT/${ID}.json -subject $ID -sample $ID
 
 if [ "$FULL" = true ]; then
-    $BIN/full.r $OUT/${ID}.tsv.dna $OUT/${ID}.hla $OUT/${ID}.hla.full
+    $BIN/Rscript full.r $OUT/${ID}.tsv.dna $OUT/${ID}.hla $OUT/${ID}.hla.full
 fi
 
-# Clean up
+echo "Cleaning up"
 if [ "$DELETE" = true ]
 then
-	rm $OUT/${ID}.tsv
-	rm $OUT/${ID}.fq.gz
-	rm $OUT/${ID}.hla
+	echo "temporarily not"
+	#rm $OUT/${ID}.tsv
+	#rm $OUT/${ID}.fq.gz
+	#rm $OUT/${ID}.hla
 fi

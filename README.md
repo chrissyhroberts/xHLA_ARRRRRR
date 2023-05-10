@@ -37,7 +37,9 @@ We use Macs, so homebrew is our method of choice for installing these dependenci
 >brew install bwa  
 >brew install diamond  
 >brew install seqtk  
-  
+>brew install samtools
+
+
 Install the R packages you will need. Some of these are native, but always worth checking.
 i.e. in R
 
@@ -73,10 +75,10 @@ Put your paired end read fastq files in the input folder
 Run the xHLA_R.R script (either through R, Rstudio or from the command line
 
 Command Line
->Rscript xHLA_R.R
+>Rscript xHLA_4.R
 
 Command Line in background with log
->nohup Rscript xHLA_R.R &
+>nohup Rscript xHLA_4.R &
 
 the report files will go to nohup.txt and you can monitor the progress with
 >tail -f nohup.txt
