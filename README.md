@@ -21,16 +21,28 @@ We have found that the typing algorithm works reproducibly given a sample of 150
 
 The R script calls seqtk to pull out a random sample of reads from each of the two read files. The same random seed is used to pull read 1 and read 2 so that the reads remain paired. You can change the number of reads that are pulled by changing the number in the two lines beneath "#randomly sample n reads from the fastq files" in the xHLA.R file
 
-The xHLA.R script will read the FASTQ files, sample 15000 reads using seqtk, then forward the data to  bwa, samtools and the xHLA typer script before pulling the reports in and making a nice tidy data table that you can read in R. 
+The xHLA_v4.R script will read the FASTQ files, sample n reads using seqtk, then forward the data to  bwa, samtools and the xHLA typer script before pulling the reports in and making a nice tidy data table that you gets saved both individually and as a dataframe
 
+You can control this from within Rstudio or from the command line. For big jobs with many different pairs of fastq files, you'll probably want to run this as a background job.
 
+A rough estimate is that it takes 10-15 minutes to analyse each sample on a machine with 16 CPUs and 32GB ram. The script automatically makes use of the number of cores it can find on your system. 
 
+You should note that this project is a bit of a mash of different languages and includes some perl, R and python. Editing and updating it can be a bit of a mess as lots of different things are coordinated by the scripts. There have been various breaking changes that seem to need occasional work by our team. If you find that this doesn't work please let us know. 
+
+Release notes v4.0
+------------ 
+
+* xHLA_R now runs as a function in R. This allows you to use tidyverse principles to control it with apply type functions. 
+* We've added some controls to specify how many reads to use. Increasing this will probably increase the quality of the HLA calls, up to a point, but will also increase the computation time proportionally. 
+* General tidying up of various bits of code
+* Superseded controls that were previously in the bash script typer.sh by bringing the steps originally run from there in to the xHLA\_R script.
 Installation
 ------------
 
 Download this repo to your computer. 
 
-Ensure that you have installed the burrows wheeler aligner (BWA), the diamond aligner and seqtk (sequence toolkit).
+Ensure that you have installed the burrows wheeler aligner (BWA), the diamond aligner, samtools and seqtk (sequence toolkit).
+
 
 We use Macs, so homebrew is our method of choice for installing these dependencies
 
