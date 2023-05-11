@@ -36,6 +36,7 @@ Release notes v4.0
 * We've added some controls to specify how many reads to use. Increasing this will probably increase the quality of the HLA calls, up to a point, but will also increase the computation time proportionally. 
 * General tidying up of various bits of code
 * Superseded controls that were previously in the bash script typer.sh by bringing the steps originally run from there in to the xHLA\_R script.
+
 Installation
 ------------
 
