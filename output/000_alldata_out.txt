@@ -1,1 +1,0 @@
-sampleID	analysis.date	report.version	report_type	hla.Ai	hla.Aii	hla.Bi	hla.Bii	hla.Ci	hla.Cii	hla.DPB1i	hla.DPB1ii	hla.DQB1i	hla.DQB1ii	hla.DRB1i	hla.DRB1ii	crosschecked
