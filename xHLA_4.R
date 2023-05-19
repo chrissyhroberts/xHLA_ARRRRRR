@@ -42,8 +42,9 @@ system("chmod +x bin/*")
 ##########################################################################
 
 xhla<-function(sample, reads.to.use,seeder = sample(1:1e6, 1)){
-
-  message("###################### Starting Analysis on  ",sample," ######################")
+  message("########################################################################################")
+  message("###################### Starting Analysis on  ",sample)
+  message("########################################################################################")
   # calculate the file names
 
   readone<-paste(sample,"_L001_R1_001.fastq",sep="")
