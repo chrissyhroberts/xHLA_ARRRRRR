@@ -44,6 +44,7 @@ Download this repo to your computer.
 
 Ensure that you have installed the burrows wheeler aligner (BWA), the diamond aligner, samtools and seqtk (sequence toolkit).
 
+### Installation on Mac
 
 We use Macs, so homebrew is our method of choice for installing these dependencies
 
@@ -52,6 +53,44 @@ We use Macs, so homebrew is our method of choice for installing these dependenci
 >brew install seqtk  
 >brew install samtools
 
+### Installation on Windows
+
+1) Install Windows subsystem for Linux
+2) Add an OS such as debian
+3) Open debian prompt and
+
+> sudo apt-get -y install bwa
+> sudo apt-get -y install diamond-aligner
+> sudo apt-get -y install seqtk
+> sudo apt-get -y install samtools
+> sudo apt-get install r-base
+> sudo apt-get install r-base-dev
+
+4) On WSL, you need permission to drop files between the host and the linux subsystem
+
+> cd /
+> sudo mkdir project
+> sudo chown $USER:$USER project
+
+This will create a folder called project on your linux machine
+You can access this from Windows by clicking Network > wsl$ > project or some similar path. 
+You can drag and drop to this folder. Put all the files for xHLA-R in to this folder 
+
+> cd project
+
+will take you to the right folder. 
+
+### Installation on Linux
+
+Open a prompt and
+> sudo apt-get -y install bwa
+> sudo apt-get -y install diamond-aligner
+> sudo apt-get -y install seqtk
+> sudo apt-get -y install samtools
+> sudo apt-get install r-base
+> sudo apt-get install r-base-dev
+
+### Set up R
 
 Install the R packages you will need. Some of these are native, but always worth checking.
 i.e. in R
@@ -59,13 +98,16 @@ i.e. in R
 >install.packages("jsonlite")  
 >install.packages("lpSolve")  
 >install.packages("data.table")  
->install.packages("parallel")  
+>install.packages("parallel")
+>install.packages("tidyverse")  
 
 >if (!require("BiocManager", quietly = TRUE))  
 >install.packages("BiocManager")  
 >BiocManager::install("IRanges")  
+
+### Get reference library
   
-IMPORTANT - The reference fasta file needs to be in place if you want this to work. 
+**IMPORTANT** - The reference fasta file needs to be in place if you xHLA-R to work. 
 
 Download a fasta reference file for chromosome 6 or the MHC region. You could use this one http://hgdownload.cse.ucsc.edu/goldenPath/hg38/chromosomes/
 The file `chr6.fa.gz` is the one to use.
