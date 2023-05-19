@@ -15,6 +15,8 @@ Background to this fork
 ------------
 We had issues getting the main repo for xHLA to work via the main docker-based repo, so we performed a quick and dirty stripdown of the code to make it work for us. The original scripts have been hacked slightly and we've added some control scripts that should be easy to run via R or R studio. Some files needed to be moved around as the stripped out scripts typer.r and typer.sh were looking in the wrong place and it was easier to move the targets than to change the scripts. 
 
+It is unclear if the parent project xHLA is still under active development, but we've seen some breaking changes in some of the tools like BWA, Samtools etc. If you've been having problems with xHLA, you may have better luck with xHLA-R as we are still curating the code as of 2023.
+
 This is intended to run as a batch mode process that will perform HLA typing on all of the fastq files in the input directory. At the end it generates a tidy table of results data. Along the way it deletes all the files except for the final json files. Obviously some of those files might be useful to some people, but for our purposes we are happy just to save disk space and keep the final typing data. To change this behaviour just edit the R scripts to take out the rm command calls to the system.
 
 We have found that the typing algorithm works reproducibly given a sample of 15000 reads from MiSeq 2*300 data that was generated from exons amplified using the methods described by Lange, V. et al BMC Genomics. 2014; 15: 63. http://doi.org/10.1186/1471-2164-15-63
@@ -28,6 +30,19 @@ You can control this from within Rstudio or from the command line. For big jobs 
 A rough estimate is that it takes 10-15 minutes to analyse each sample on a machine with 16 CPUs and 32GB ram. The script automatically makes use of the number of cores it can find on your system. 
 
 You should note that this project is a bit of a mash of different languages and includes some perl, R and python. Editing and updating it can be a bit of a mess as lots of different things are coordinated by the scripts. There have been various breaking changes that seem to need occasional work by our team. If you find that this doesn't work please let us know. 
+
+**Version history**
+------------
+|Version|Date|
+|-------|----|
+|v4.0.3 [current]  |2023-05-19 |
+|v4.0.2| 2023-05-15  |
+|v4.0.1| 2023-05-12  |
+|v3.0.0| 2022-12-09  |
+|v2.0.0| 2022-10-01  |
+|v1.0.1| 2022-05-08  |
+|v1.0.0| 2017-10-05  |
+
 
 Release notes v4.0
 ------------ 
