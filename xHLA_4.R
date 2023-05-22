@@ -154,7 +154,7 @@ df<-xhla(sample = samples$id[1],reads.to.use = 7500)
 if(nrow(samples)>1){
 for(i in 2:nrow(samples)){
                           message(paste("starting alignment",i,"of ",nrow(samples),sep = " "))
-                          df<-bind_rows(df,xhla(sample = samples$id[i],reads.to.use = 7500))
+                          try(df<-bind_rows(df,xhla(sample = samples$id[i],reads.to.use = 7500)))
                           }
 					}
 write_csv(df,"output/full_typing_report.csv")
